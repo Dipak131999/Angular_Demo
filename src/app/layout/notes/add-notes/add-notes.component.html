@@ -1,0 +1,57 @@
+
+
+
+
+<div class="custom">
+  <div class="card-header m-0">
+    <div class="row">
+      <div class="main">
+        <h3 class="text-left fw-600">Add Notes</h3>
+        <span (click)="hideModal()" class="close-icon cursor-pointer">
+          &times;
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="notesForm">
+      <label class="form-group">Title:</label>
+      <input type="text" id="title" formControlName="title" required />
+      <div
+        class="ml-1 text-left validation-msg"
+        *ngIf="
+        isFormSubmitted &&
+        sharedService.getFormControls(notesForm)?.['title']?.errors &&
+        sharedService.getFormControls(notesForm)?.['title']?.errors
+          ?.['required']
+      "
+      >
+        Enter the title
+      </div>
+      <label class="form-group">description:</label>
+      <textarea
+        type="textarea"
+        id="username"
+        formControlName="description"
+        required
+        rows="5"
+      ></textarea>
+      <div
+        class="ml-1 text-left validation-msg"
+        *ngIf="
+                  isFormSubmitted &&
+                  sharedService.getFormControls(notesForm)?.['description']
+                    ?.errors &&
+                  sharedService.getFormControls(notesForm)?.['description']
+                    ?.errors?.['required']
+                "
+      >
+        Enter the description
+      </div>
+    </form>
+    <div class="modal-button">
+      <button class="btn btn-success" (click)="addNotes()">Add</button>
+      <button class="btn btn-danger mr-5" (click)="hideModal()">Cancel</button>
+    </div>
+  </div>
+</div>
